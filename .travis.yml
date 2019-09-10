@@ -3,20 +3,20 @@ services:
   - docker
 
 before_install:
-  - docker build -t edwardsmith/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t chops318/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true edwardsmith/react-test npm test
+  - docker run -e CI=true chops318/react-test npm test
 
 after_success:
-  - docker build -t edwardsmith/multi-client ./client
-  - docker build -t edwardsmith/multi-nginx ./nginx
-  - docker build -t edwardsmith/multi-server ./server
-  - docker build -t edwardsmith/multi-worker ./worker
+  - docker build -t chops318/multi-client ./client
+  - docker build -t chops318/multi-nginx ./nginx
+  - docker build -t chops318/multi-server ./server
+  - docker build -t chops318/multi-worker ./worker
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
-  - docker push edwardsmith/multi-client
-  - docker push edwardsmith/multi-nginx
-  - docker push edwardsmith/multi-server
-  - docker push edwardsmith/multi-worker
+  - docker push chops318/multi-client
+  - docker push chops318/multi-nginx
+  - docker push chops318/multi-server
+  - docker push chops318/multi-worker
